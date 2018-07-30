@@ -8,17 +8,16 @@ import static org.junit.Assert.assertTrue;
 public class Queue_test {
 
     private static Queue isEmpty = new Queue();
-    private static Queue isNotEmpty = new Queue();
-
-    @BeforeClass
-    public static void setup() {
-        isNotEmpty.enqueue("1");
-        isNotEmpty.enqueue("2");
-    }
 
     @Test
     public void testIsEmpty() {
         assertEquals(true, isEmpty.isEmpty());
+        
+        Queue isNotEmpty = new Queue();
+        
+        isNotEmpty.enqueue("1");
+        isNotEmpty.enqueue("2");
+        
         assertEquals(false, isNotEmpty.isEmpty());
     }
 
@@ -84,23 +83,23 @@ public class Queue_test {
 
     @Test
     public void testAlwaysUseAllAvailableCapacity() {
-        Queue queue = new Queue();
+        Queue queue = new Queue(4);
 
         queue.enqueue("1");
         queue.enqueue("2");
         queue.enqueue("3");
         queue.enqueue("4");
-//        queue.enqueue("5");
 
         queue.dequeue();
-        queue.enqueue("6");
-        assertTrue(queue.contains("6"));
+        queue.enqueue("5");
+        
+        assertTrue(queue.contains("5"));
+        assertTrue(queue.contains("4"));
 
         queue.dequeue();
         queue.dequeue();
         queue.dequeue();
-        queue.dequeue();
-        assertEquals("6", queue.dequeue());
+        assertEquals("5", queue.dequeue());
     }
 
     @Test
@@ -113,8 +112,8 @@ public class Queue_test {
         queue.enqueue("4");
         queue.enqueue("5");
 
-        assertEquals(5, queue.size()); // may not work in cases, i.e. where enqueue always increases size
-        assertTrue(queue.contains("5")); // "seems" safer than size check
+        assertEquals(5, queue.size());
+        assertTrue(queue.contains("5"));
 
         Queue wrapRoundQueue = new Queue(4);
 
