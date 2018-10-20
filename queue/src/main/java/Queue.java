@@ -1,33 +1,41 @@
 public class Queue {
-    public Queue(int capacity) {
 
-    }
+    private int size = 0;
+    private Object[] arrayOfItems = new Object[5];
+    private int head = 0;
 
-    public Queue() {
-
+    public boolean isEmpty() {
+        return size == 0;
     }
 
     public void enqueue(Object item) {
-
-    }
-
-    public boolean isEmpty() {
-        return false;
+        arrayOfItems[size++] = item;
     }
 
     public int size() {
-        return 0;
+        return size;
     }
 
     public Object dequeue() {
-        return null;
+
+        if (isEmpty()) return "Nothing left";
+
+        Object dequeuedItem = arrayOfItems[head];
+        arrayOfItems[head] = null;
+        head++;
+        size--;
+        return dequeuedItem;
     }
 
     public boolean contains(Object item) {
+        for (int i = head; i < size; i++) {
+            if (arrayOfItems[i].equals(item)) return true;
+        }
+
         return false;
     }
 
     public boolean isFull() {
-        return false;
+        return size == arrayOfItems.length;
     }
 }

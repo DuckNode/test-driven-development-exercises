@@ -1,41 +1,39 @@
-import org.junit.BeforeClass;
 import org.junit.Test;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
+import static junit.framework.TestCase.assertFalse;
+import static junit.framework.TestCase.assertEquals;
+import static junit.framework.TestCase.assertTrue;
 
 public class Queue_test {
 
-    private static Queue isEmpty = new Queue();
-
     @Test
-    public void testIsEmpty() {
+    public void isEmpty() {
+        Queue isEmpty = new Queue();
+
         assertEquals(true, isEmpty.isEmpty());
-        
+
         Queue isNotEmpty = new Queue();
-        
+
         isNotEmpty.enqueue("1");
-        isNotEmpty.enqueue("2");
-        
         assertEquals(false, isNotEmpty.isEmpty());
     }
 
     @Test
-    public void testEnqueueAnItem() {
-        assertEquals(0, isEmpty.size());
-
+    public void enqueueAnItem() {
         Queue queue = new Queue();
+
+        assertEquals(0, queue.size()); // omit on creation for candidate to suggest
 
         queue.enqueue("1");
         assertEquals(1, queue.size());
 
+        // omit on creation for candidate to suggest
         queue.enqueue("2");
         assertEquals(2, queue.size());
     }
 
     @Test
-    public void testDequeueAnItem() {
+    public void dequeueAnItem() {
         Queue queue = new Queue();
 
         queue.enqueue("1");
@@ -44,9 +42,11 @@ public class Queue_test {
         assertEquals("1", queue.dequeue());
         assertEquals(1, queue.size());
 
+        // omit on creation for candidate to suggest
         assertEquals("2", queue.dequeue());
         assertEquals(0, queue.size());
 
+        // omit on creation for candidate to suggest
         assertEquals("Nothing left", queue.dequeue());
         assertEquals(0, queue.size());
     }
@@ -58,15 +58,16 @@ public class Queue_test {
         queue.enqueue("1");
         assertTrue(queue.contains("1"));
 
+        // omit on creation for candidate to suggest
         queue.dequeue();
         assertFalse(queue.contains("1"));
     }
 
     @Test
     public void isFull() {
-        assertFalse(isEmpty.isFull());
-
         Queue queue = new Queue();
+
+        assertFalse(queue.isFull()); // omit on creation for candidate to suggest
 
         queue.enqueue("1");
         queue.enqueue("2");
@@ -78,58 +79,6 @@ public class Queue_test {
 
         queue.dequeue();
 
-        assertFalse(queue.isFull());
+        assertFalse(queue.isFull()); // omit on creation for candidate to suggest
     }
-
-    @Test
-    public void testAlwaysUseAllAvailableCapacity() {
-        Queue queue = new Queue(4);
-
-        queue.enqueue("1");
-        queue.enqueue("2");
-        queue.enqueue("3");
-        queue.enqueue("4");
-
-        queue.dequeue();
-        queue.enqueue("5");
-        
-        assertTrue(queue.contains("5"));
-        assertTrue(queue.contains("4"));
-
-        queue.dequeue();
-        queue.dequeue();
-        queue.dequeue();
-        assertEquals("5", queue.dequeue());
-    }
-
-    @Test
-    public void testIncreaseCapacity() {
-        Queue queue = new Queue(4);
-
-        queue.enqueue("1");
-        queue.enqueue("2");
-        queue.enqueue("3");
-        queue.enqueue("4");
-        queue.enqueue("5");
-
-        assertEquals(5, queue.size());
-        assertTrue(queue.contains("5"));
-
-        Queue wrapRoundQueue = new Queue(4);
-
-        wrapRoundQueue.enqueue("1");
-        wrapRoundQueue.enqueue("2");
-        wrapRoundQueue.enqueue("3");
-        wrapRoundQueue.enqueue("4");
-        wrapRoundQueue.dequeue();
-        wrapRoundQueue.enqueue("5");
-        wrapRoundQueue.enqueue("6");
-
-        assertEquals("2", wrapRoundQueue.dequeue());//may be always positive depending on candidate implementation
-        assertEquals("3", wrapRoundQueue.dequeue());//may be always positive depending on candidate implementation
-        assertEquals("4", wrapRoundQueue.dequeue());//may be always positive depending on candidate implementation
-        assertEquals("5", wrapRoundQueue.dequeue());//may be always positive depending on candidate implementation
-        assertEquals("6", wrapRoundQueue.dequeue());
-    }
-
 }
