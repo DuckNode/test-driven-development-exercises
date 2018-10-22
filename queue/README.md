@@ -21,7 +21,7 @@ public boolean isEmpty() {
 }
 ```
 
-##### Test 3 notes
+##### Test 3
 Candidate may initially use a loop such as below.
 ```
 public Object dequeue() {

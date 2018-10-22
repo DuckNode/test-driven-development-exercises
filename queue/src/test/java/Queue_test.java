@@ -33,6 +33,18 @@ public class Queue_test {
     }
 
     @Test
+    public void testContains() {
+        Queue queue = new Queue();
+
+        queue.enqueue("1");
+        assertTrue(queue.contains("1"));
+
+        // omit on creation for candidate to suggest
+        queue.dequeue();
+        assertFalse(queue.contains("1"));
+    }
+
+    @Test
     public void dequeueAnItem() {
         Queue queue = new Queue();
 
@@ -49,18 +61,6 @@ public class Queue_test {
         // omit on creation for candidate to suggest
         assertEquals("Nothing left", queue.dequeue());
         assertEquals(0, queue.size());
-    }
-
-    @Test
-    public void testContains() {
-        Queue queue = new Queue();
-
-        queue.enqueue("1");
-        assertTrue(queue.contains("1"));
-
-        // omit on creation for candidate to suggest
-        queue.dequeue();
-        assertFalse(queue.contains("1"));
     }
 
     @Test
