@@ -37,11 +37,15 @@ public class Queue_test {
         Queue queue = new Queue();
 
         queue.enqueue("1");
+        queue.enqueue("2");
+
         assertTrue(queue.contains("1"));
+        assertTrue(queue.contains("2"));
 
         // omit on creation for candidate to suggest
         queue.dequeue();
         assertFalse(queue.contains("1"));
+        assertTrue(queue.contains("2"));
     }
 
     @Test

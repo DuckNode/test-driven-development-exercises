@@ -28,10 +28,9 @@ public class Queue {
     }
 
     public boolean contains(Object item) {
-        for (int i = head; i < size; i++) {
+        for (int i = head; i < head + size; i++) {
             if (arrayOfItems[i].equals(item)) return true;
         }
-
         return false;
     }
 
